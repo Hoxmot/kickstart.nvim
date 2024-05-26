@@ -904,10 +904,18 @@ require('lazy').setup({
       { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
     },
   },
+
   {
     'letieu/btw.nvim',
     config = function()
       require('btw').setup()
+    end,
+  },
+
+  {
+    'FabijanZulj/blame.nvim',
+    config = function()
+      require('blame').setup()
     end,
   },
 
