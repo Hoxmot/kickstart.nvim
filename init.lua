@@ -665,13 +665,13 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        typescript = { { 'prettier', 'prettierd', 'eslint_d' } },
+        typescript = { 'prettier', 'prettierd', 'eslint_d', stop_after_first=true },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        javascript = { { 'prettierd', 'prettier', 'eslint_d' } },
+        javascript = { 'prettierd', 'prettier', 'eslint_d', stop_after_first=true },
       },
     },
   },
