@@ -587,6 +587,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        zls = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -663,13 +664,13 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        typescript = { 'prettier', 'prettierd', 'eslint_d', stop_after_first=true },
+        typescript = { 'prettier', 'prettierd', 'eslint_d', stop_after_first = true },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        javascript = { 'prettierd', 'prettier', 'eslint_d', stop_after_first=true },
+        javascript = { 'prettierd', 'prettier', 'eslint_d', stop_after_first = true },
       },
     },
   },
