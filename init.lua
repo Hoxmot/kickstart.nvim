@@ -692,6 +692,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
+        astro = {},
         bashls = {},
         lua_ls = {
           -- cmd = { ... },
