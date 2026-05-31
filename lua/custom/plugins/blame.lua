@@ -1,6 +1,5 @@
-return {
-  'FabijanZulj/blame.nvim',
-  config = function()
-    require('blame').setup()
-  end,
-}
+-- blame
+-- https://github.com/FabijanZulj/blame.nvim
+
+vim.pack.add {'https://github.com/FabijanZulj/blame.nvim'}
+require('blame').setup()
