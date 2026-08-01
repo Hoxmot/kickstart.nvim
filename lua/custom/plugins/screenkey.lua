@@ -1,8 +1,5 @@
-return {
-  'NStefan002/screenkey.nvim',
-  lazy = false,
-  version = '*', -- or branch = "dev", to use the latest commit
-  opts = {
-    group_mappings = true,
-  },
-}
+-- screenkey
+-- https://github.com/NStefan002/screenkey.nvim
+
+vim.pack.add { { src = 'https://github.com/NStefan002/screenkey.nvim', version = vim.version.range '*' } }
+require('screenkey').setup { group_mappings = true }
