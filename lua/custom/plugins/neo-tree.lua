@@ -1,38 +1,36 @@
 -- Neo-tree is a Neovim plugin to browse the file system
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
+--
+-- NOTE: kickstart ships its own migrated copy at lua/kickstart/plugins/neo-tree.lua.
+-- That require stays commented out in init.lua - this file replaces it.
 
-return {
-  'nvim-neo-tree/neo-tree.nvim',
-  version = '*',
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-    'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
-    'MunifTanjim/nui.nvim',
+local plugins = {
+  { src = 'https://github.com/nvim-neo-tree/neo-tree.nvim', version = vim.version.range '*' },
+  'https://github.com/nvim-lua/plenary.nvim',
+  'https://github.com/MunifTanjim/nui.nvim',
+}
+
+if vim.g.have_nerd_font then
+  table.insert(plugins, 'https://github.com/nvim-tree/nvim-web-devicons') -- not strictly required, but recommended
+end
+
+vim.pack.add(plugins)
+
+vim.keymap.set('n', '\\', '<Cmd>Neotree reveal<CR>', { desc = 'NeoTree reveal', silent = true })
+
+require('neo-tree').setup {
+  window = {
+    position = 'current',
+    mappings = {
+      ['h'] = 'close_node',
+      ['l'] = 'open',
+    },
   },
-  cmd = 'Neotree',
-  keys = {
-    { '\\', ':Neotree reveal<CR>', { desc = 'NeoTree reveal' } },
-  },
-  config = function()
-    require('neo-tree').setup {
-      window = {
-        position = 'current',
-        mappings = {
-          ['h'] = 'close_node',
-          ['l'] = 'open',
-        },
-      },
-      filesystem = {
-        hijack_netrw_behavior = 'open_default',
-      },
-    }
-  end,
-  opts = {
-    filesystem = {
-      window = {
-        mappings = {
-          ['\\'] = 'close_window',
-        },
+  filesystem = {
+    hijack_netrw_behavior = 'open_default',
+    window = {
+      mappings = {
+        ['\\'] = 'close_window',
       },
     },
   },
