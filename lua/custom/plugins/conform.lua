@@ -7,11 +7,11 @@
 -- `formatters_by_ft` is merged rather than clobbered.
 
 local formatters_by_ft = {
-  javascript = { 'prettier', 'prettierd', 'eslint_d', stop_after_first = true },
+  javascript = { 'prettierd', 'prettier', 'eslint_d', stop_after_first = true },
   lua = { 'stylua' },
   python = { 'isort', 'black' },
   sh = { 'shfmt' },
-  typescript = { 'prettier', 'prettierd', 'eslint_d', stop_after_first = true },
+  typescript = { 'prettierd', 'prettier', 'eslint_d', stop_after_first = true },
 }
 
 require('conform').setup {
