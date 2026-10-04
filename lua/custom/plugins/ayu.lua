@@ -12,9 +12,19 @@ require('ayu').setup {
   -- nvim_set_hl directly replaces the whole group and drops the fg colour.
   -- It also re-applies on `:colorscheme ayu-dark`, which a one-shot call
   -- would not.
-  overrides = {
-    Normal = { bg = 'none' },
-  },
+  --
+  -- A function rather than a table so the palette is read after ayu has
+  -- generated it for the active variant (dark / mirage / light).
+  overrides = function()
+    local colors = require 'ayu.colors'
+    return {
+      Normal = { bg = 'none' },
+      -- ayu draws line numbers in `guide_normal`, which is near-black in
+      -- ayu-dark and vanishes over a transparent background. `gutter_active`
+      -- is the theme's own gutter colour and stays readable.
+      LineNr = { fg = colors.gutter_active },
+    }
+  end,
 }
 
 -- Load the colorscheme here.
