@@ -815,7 +815,8 @@ do
     'black',
   })
 
-  require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+  -- NVIM_NO_INSTALL=1 (set on servers): never download tools at runtime.
+  if not vim.env.NVIM_NO_INSTALL then require('mason-tool-installer').setup { ensure_installed = ensure_installed } end
 
   for name, server in pairs(servers) do
     vim.lsp.config(name, server)
@@ -958,7 +959,9 @@ do
 
   -- Ensure basic parsers are installed
   local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
-  require('nvim-treesitter').install(parsers)
+  -- NVIM_NO_INSTALL=1 (set on servers): no parser downloads or compiles; the
+  -- parsers bundled with Neovim (c, lua, markdown, query, vim, vimdoc) still work.
+  if not vim.env.NVIM_NO_INSTALL then require('nvim-treesitter').install(parsers) end
 
   ---@param buf integer
   ---@param language string
@@ -998,7 +1001,7 @@ do
       if vim.tbl_contains(installed_parsers, language) then
         -- Enable the parser if it is already installed
         treesitter_try_attach(buf, language)
-      elseif vim.tbl_contains(available_parsers, language) then
+      elseif not vim.env.NVIM_NO_INSTALL and vim.tbl_contains(available_parsers, language) then
         -- If a parser is available in `nvim-treesitter`, auto-install it and enable it after the installation is done
         require('nvim-treesitter').install(language):await(function() treesitter_try_attach(buf, language) end)
       else
